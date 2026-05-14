@@ -1,0 +1,126 @@
+.quien-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  color: #fff;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #a78bfa;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  color: #aaa;
+}
+
+.error-msg {
+  color: #f87171;
+  text-align: center;
+}
+
+.profile-card {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  background: #1e1e2f;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #a78bfa;
+  object-fit: cover;
+}
+
+.profile-info h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.2rem;
+  color: #fff;
+}
+
+.username {
+  color: #a78bfa;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bio {
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.detail {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+
+.stats span {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.gh-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #34d399;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.gh-link:hover {
+  color: #059669;
+}
+
+.juego-section {
+  background: #1e1e2f;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.juego-section h3 {
+  color: #fbbf24;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.juego-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0;
+}
+
+.juego-section li {
+  padding: 0.4rem 0;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.points {
+  color: #fbbf24;
+  font-weight: bold;
+}
+
+.juego-section p {
+  color: #ccc;
+  line-height: 1.6;
+}

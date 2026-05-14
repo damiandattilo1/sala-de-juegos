@@ -1,0 +1,45 @@
+<div class="quien-container">
+  <h2>Quién Soy</h2>
+
+  @if (loading) {
+    <p class="loading">Cargando perfil...</p>
+  }
+
+  @if (error) {
+    <p class="error-msg">{{ error }}</p>
+  }
+
+  @if (githubUser) {
+    <div class="profile-card">
+      <img [src]="githubUser.avatar_url" alt="Foto de perfil" class="avatar" />
+      <div class="profile-info">
+        <h3>{{ githubUser.name || githubUser.login }}</h3>
+        <p class="username">&#64;{{ githubUser.login }}</p>
+        @if (githubUser.bio) { <p class="bio">{{ githubUser.bio }}</p> }
+        @if (githubUser.location) { <p class="detail">📍 {{ githubUser.location }}</p> }
+        <div class="stats">
+          <span><strong>{{ githubUser.public_repos }}</strong> repos</span>
+          <span><strong>{{ githubUser.followers }}</strong> seguidores</span>
+          <span><strong>{{ githubUser.following }}</strong> siguiendo</span>
+        </div>
+        <a [href]="githubUser.html_url" target="_blank" class="gh-link">Ver perfil en GitHub ↗</a>
+      </div>
+    </div>
+  }
+
+  <div class="juego-section">
+    <h3>🎲 Juego propio: Generala Simple</h3>
+    <p>
+      Dos jugadores tiran 5 dados al azar por turnos y según las combinaciones acumulan puntos.
+    </p>
+    <ul>
+      <li><strong>Generala</strong> — 5 números iguales → <span class="points">100 puntos</span></li>
+      <li><strong>Póker</strong> — 4 iguales + 1 distinto → <span class="points">80 puntos</span></li>
+      <li><strong>Full</strong> — 3 iguales + 2 iguales → <span class="points">50 puntos</span></li>
+    </ul>
+    <p>
+      El juego termina cuando un jugador supera <strong>200 puntos</strong> o cuando se completan
+      <strong>10 tiros por jugador</strong>.
+    </p>
+  </div>
+</div>
