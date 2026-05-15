@@ -23,6 +23,7 @@ export class AppComponent {
   title = 'tp-sala-juegos';
 
   prepareRoute(outlet: RouterOutlet) {
+    if (!outlet?.isActivated) return null;
     return outlet?.activatedRouteData?.['animation'] ?? outlet?.activatedRoute?.snapshot?.url?.[0]?.path;
   }
 }

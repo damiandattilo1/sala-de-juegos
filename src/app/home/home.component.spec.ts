@@ -24,8 +24,9 @@ describe('HomeComponent', () => {
     expect(compiled.querySelector('h2')?.textContent).toContain('Bienvenido');
   });
 
-  it('should render a subtitle paragraph', () => {
+  it('should render at least one game card', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.subtitle')).toBeTruthy();
+    const cards = compiled.querySelectorAll('.game-card');
+    expect(cards.length).toBeGreaterThan(0);
   });
 });

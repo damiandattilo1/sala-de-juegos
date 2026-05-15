@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideRouter } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { routes } from './app.routes';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideRouter(routes), provideAnimations()]
     }).compileComponents();
   });
 
@@ -20,10 +24,19 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('tp-sala-juegos');
   });
 
-  it('should render title', () => {
+  it('should render the app header with navigation buttons', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, tp-sala-juegos');
+    expect(compiled.querySelector('header')).toBeTruthy();
+    const buttons = compiled.querySelectorAll('nav button');
+    expect(buttons.length).toBe(4);
+  });
+
+  it('should render the Sala de Juegos title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Sala de Juegos');
   });
 });
