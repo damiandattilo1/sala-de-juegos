@@ -41,6 +41,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
+# Consigna y pautas
 Pautas de entrega.txt
 PROGRAMACION IV - TP Sala de Juegos #1.txt
+
+# firebase logs and deploys
+firebase-debug.log
+.firebase/hosting*
