@@ -35,7 +35,7 @@ if (-not (Get-Command ng    -ErrorAction SilentlyContinue)) { Err "Angular CLI n
 if (-not (Get-Command firebase -ErrorAction SilentlyContinue)) { Err "Firebase CLI no instalado. Ejecutá: npm install -g firebase-tools" }
 
 $nodeVer = (node --version)
-$ngVer   = try { (ng version 2>&1 | Select-String 'Angular CLI' | Select-Object -First 1).ToString().Trim().Split()[-1] } catch { "N/A" }
+$ngVer   = try { (ng version 2>&1 | Select-String 'Angular CLI' | Select-Object -First 1).ToString().Trim().Split() | Select-Object -Last 1 } catch { "N/A" }
 $fbVer   = (firebase --version)
 Success "Node $nodeVer | Angular CLI $ngVer | Firebase CLI $fbVer"
 
