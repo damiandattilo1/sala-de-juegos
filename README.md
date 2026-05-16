@@ -25,7 +25,7 @@
 - Navegación entre componentes sin restricciones de acceso.
 - Quién Soy consume la API de GitHub (`damiandattilo1`) mostrando avatar, nombre, bio, ubicación y estadísticas.
 - Explicación del juego propio: **Generala Simple**.
-- Favicon personalizado (SVG).
+- Favicon personalizado.
 - Bootstrap 5 y animaciones CSS/TypeScript de transición entre rutas.
 
 ### Sprint #2 *(próximamente)*
