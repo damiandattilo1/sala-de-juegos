@@ -1,0 +1,43 @@
+<div class="home-container animate-fade-in">
+  <h2>Sala de Juegos</h2>
+
+  @if (user) {
+    <div class="user-info">
+      <span class="user-name">👤 {{ nombreUsuario || user.email }}</span>
+      <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+    </div>
+    <p class="subtitle">Elegí un juego y poné a prueba tu suerte</p>
+    <div class="games-grid">
+      <div class="game-card">
+        <div class="game-icon">🔤</div>
+        <h3>Ahorcado</h3>
+        <p>Adivina la palabra letra por letra.</p>
+        <span class="badge">Próximamente</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🃏</div>
+        <h3>Mayor o Menor</h3>
+        <p>¿La siguiente carta será mayor o menor?</p>
+        <span class="badge">Próximamente</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">❓</div>
+        <h3>Preguntados</h3>
+        <p>Respondé preguntas de trivia.</p>
+        <span class="badge">Próximamente</span>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">🎲</div>
+        <h3>Generala Simple</h3>
+        <p>Probá tu suerte con los dados.</p>
+        <span class="badge">Próximamente</span>
+      </div>
+    </div>
+  } @else {
+    <p class="subtitle">Registrate o iniciá sesión para acceder a los juegos</p>
+    <div class="auth-btns">
+      <button class="btn-auth" routerLink="/login">Iniciar Sesión</button>
+      <button class="btn-auth btn-auth-outline" routerLink="/registro">Registrarse</button>
+    </div>
+  }
+</div>

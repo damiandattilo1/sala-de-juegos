@@ -1,0 +1,124 @@
+.home-container {
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #a78bfa;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.games-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  background: #1e1e2f;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 220px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+}
+
+.game-icon {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+}
+
+.game-card h3 {
+  color: #a78bfa;
+  margin-bottom: 0.5rem;
+}
+
+.game-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  background: #2a2a3d;
+  color: #a78bfa;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  border: 1px solid #a78bfa;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user-name {
+  color: #a78bfa;
+  font-size: 1rem;
+}
+
+.btn-logout {
+  background: transparent;
+  color: #f87171;
+  border: 1px solid #f87171;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: #f87171;
+  color: #fff;
+}
+
+.auth-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-auth {
+  background: #a78bfa;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-auth:hover {
+  background: #7c3aed;
+}
+
+.btn-auth-outline {
+  background: transparent;
+  color: #a78bfa;
+  border: 1px solid #a78bfa;
+}
+
+.btn-auth-outline:hover {
+  background: #a78bfa;
+  color: #fff;
+}
