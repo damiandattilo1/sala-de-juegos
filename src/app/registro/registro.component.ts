@@ -32,6 +32,6 @@ export class RegistroComponent {
     }
     this.error = '';
     this.success = '¡Registro exitoso! Redirigiendo...';
-    setTimeout(() => this.router.navigate(['/ingresar'], { skipLocationChange: true }), 1500);
+    setTimeout(() => this.router.navigate(['/ingresar']), 1500);
   }
 }
