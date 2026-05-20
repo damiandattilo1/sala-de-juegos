@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { trigger, transition, style, animate, query } from '@angular/animations';
 
 export const routeAnimations = trigger('routeAnimations', [
@@ -14,13 +14,19 @@ export const routeAnimations = trigger('routeAnimations', [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   animations: [routeAnimations]
 })
 export class AppComponent {
   title = 'tp-sala-juegos';
+
+  constructor(private router: Router) {}
+
+  navigateSilently(path: string) {
+    this.router.navigate([path], { skipLocationChange: true });
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     if (!outlet?.isActivated) return null;

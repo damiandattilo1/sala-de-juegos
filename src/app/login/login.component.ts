@@ -18,7 +18,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.email && this.password) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/'], { skipLocationChange: true });
     } else {
       this.error = 'Por favor completá todos los campos.';
     }

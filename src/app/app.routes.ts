@@ -5,9 +5,9 @@ import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
+    { path: '', component: HomeComponent },
+    { path: 'ingresar', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
-    { path: 'home', component: HomeComponent },
     { path: 'quien-soy', component: QuienSoyComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
