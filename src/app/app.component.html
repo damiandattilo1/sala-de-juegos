@@ -1,4 +1,20 @@
 <header class="app-header">
+  <h1 class="brand">
+    <img src="assets/logo.png" alt="Logo Sala de Juegos" class="brand-logo" />
+    <span>Sala de Juegos</span>
+  </h1>
+  <nav>
+    <button routerLink="/" class="nav-btn">Home</button>
+    <button routerLink="/ingresar" class="nav-btn">Login</button>
+    <button routerLink="/registro" class="nav-btn">Registro</button>
+    <button routerLink="/quien-soy" class="nav-btn">Quién Soy</button>
+  </nav>
+</header>
+
+<main [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+  <img src="assets/logo.png" alt="Logo Sala de Juegos" class="brand-logo bottom-logo" />
+</main><header class="app-header">
   <h1>Sala de Juegos 🎲</h1>
   <nav>
     @if (currentUser) {

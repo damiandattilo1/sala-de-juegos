@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
-interface GitHubProfile {
-  name: string;
-  login: string;
-  avatar_url: string;
-  bio: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  html_url: string;
-  location: string;
-  blog: string;
-}
+import { GitHubProfile } from '../models/github-profile.model';
+import { ImporterService } from '../services/importer.service';
 
 @Component({
   selector: 'app-quien-soy',
@@ -28,10 +17,10 @@ export class QuienSoyComponent implements OnInit {
   error = '';
   readonly githubUsername = 'damiandattilo1';
 
-  constructor(private http: HttpClient) {}
+  constructor(private importerService: ImporterService) {}
 
   ngOnInit() {
-    this.http.get<GitHubProfile>(`https://api.github.com/users/${this.githubUsername}`)
+    this.importerService.importGitHubProfile(this.githubUsername)
       .subscribe({
         next: (data) => {
           this.githubUser = data;
