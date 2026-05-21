@@ -1,0 +1,45 @@
+<section class="generala-container animate-fade-in-up">
+  <h2>Generala Simple</h2>
+  <p class="subtitle">Dos jugadores tiran 5 dados por turno y suman puntos por combinaciones.</p>
+
+  <div class="rules-box">
+    <p><strong>Generala</strong> (5 iguales): 100 puntos</p>
+    <p><strong>Poker</strong> (4 iguales): 80 puntos</p>
+    <p><strong>Full</strong> (3 + 2): 50 puntos</p>
+    <p><strong>Sin juego</strong>: 10 puntos</p>
+    <p>La partida termina al llegar a 200 puntos o al completar 10 rondas.</p>
+  </div>
+
+  <div class="score-box">
+    <p>Ronda: {{ currentRound }} / {{ maxRounds }}</p>
+    <p>Jugador: <strong>{{ playerPoints }}</strong> puntos</p>
+    <p>CPU: <strong>{{ cpuPoints }}</strong> puntos</p>
+  </div>
+
+  <div class="dice-grid" *ngIf="playerDice.length > 0">
+    <div class="dice-column">
+      <h3>Jugador</h3>
+      <div class="dice-list">
+        <span class="dice" *ngFor="let die of playerDice">{{ die }}</span>
+      </div>
+      <p class="combo">{{ playerCombo }}</p>
+    </div>
+
+    <div class="dice-column">
+      <h3>CPU</h3>
+      <div class="dice-list">
+        <span class="dice" *ngFor="let die of cpuDice">{{ die }}</span>
+      </div>
+      <p class="combo">{{ cpuCombo }}</p>
+    </div>
+  </div>
+
+  <p class="status" [class.status-ok]="gameFinished && won" [class.status-fail]="gameFinished && !won">
+    {{ statusMessage }}
+  </p>
+
+  <div class="actions">
+    <button type="button" class="main-btn" [disabled]="gameFinished" (click)="rollRound()">Tirar dados</button>
+    <button type="button" class="main-btn alt-btn" (click)="startGame()">Nueva partida</button>
+  </div>
+</section>

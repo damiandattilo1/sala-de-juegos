@@ -1,0 +1,59 @@
+.resultados-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+h2 {
+  margin: 0;
+  text-align: center;
+  color: #a78bfa;
+}
+
+.subtitle {
+  text-align: center;
+  color: #b8b8c7;
+  margin-bottom: 1.2rem;
+}
+
+.error-msg {
+  color: #fda4af;
+  text-align: center;
+}
+
+.table-card {
+  background: #1f1f33;
+  border: 1px solid #2d2d49;
+  border-radius: 14px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.table-card h3 {
+  margin: 0 0 0.7rem;
+  color: #c4b5fd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #343454;
+  padding: 0.55rem;
+  text-align: left;
+  color: #e5e7eb;
+  font-size: 0.92rem;
+}
+
+th {
+  color: #d8b4fe;
+  font-weight: 700;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}

@@ -43,4 +43,9 @@
 - Persistencia en Firestore de resultados de Ahorcado y Mayor o Menor.
 - Persistencia en Firestore de mensajes del chat (usuario, mensaje, fecha/hora).
 
-### Sprint #4 *(próximamente)*
+### Sprint #4
+- Juego **Preguntados** implementado consumiendo la API OpenTDB (`https://opentdb.com/api.php?amount=10&type=multiple`).
+- Respuestas de Preguntados con opciones por botones y guardado de desempeño en Firestore (aciertos, total, tiempo).
+- Juego propio **Generala Simple** implementado con reglas, condición de victoria/derrota y persistencia de resultados.
+- Página **Resultados** agregada con 4 tablas (Ahorcado, Mayor o Menor, Preguntados y Generala).
+- Rankings ordenados de mejor desempeño/puntaje a peor para cada juego.

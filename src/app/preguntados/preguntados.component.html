@@ -1,0 +1,51 @@
+<section class="preguntados-container animate-fade-in-up">
+  <h2>Preguntados</h2>
+  <p class="subtitle">Responde 10 preguntas de trivia de OpenTDB.</p>
+
+  @if (loading) {
+    <p class="state-msg">Cargando preguntas...</p>
+  }
+
+  @if (!loading && loadError) {
+    <p class="state-msg state-error">{{ loadError }}</p>
+    <button type="button" class="main-btn" (click)="restartGame()">Reintentar</button>
+  }
+
+  @if (!loading && !loadError && currentQuestion) {
+    <div class="question-card">
+      <p class="progress">Pregunta {{ progressLabel }}</p>
+      <p class="meta">{{ currentQuestion.category }} • {{ currentQuestion.difficulty | titlecase }}</p>
+      <p class="question">{{ currentQuestion.question }}</p>
+
+      <div class="answers-grid">
+        <button
+          *ngFor="let answer of currentQuestion.answers"
+          type="button"
+          class="answer-btn"
+          [class.answer-btn-correct]="answerChecked && answer === currentQuestion.correctAnswer"
+          [class.answer-btn-wrong]="answerChecked && selectedAnswer === answer && answer !== currentQuestion.correctAnswer"
+          [disabled]="answerChecked"
+          (click)="selectAnswer(answer)"
+        >
+          {{ answer }}
+        </button>
+      </div>
+
+      @if (statusMessage) {
+        <p class="feedback">{{ statusMessage }}</p>
+      }
+
+      <div class="footer-actions">
+        <span class="score">Aciertos: {{ score }}</span>
+        <button type="button" class="main-btn" [disabled]="!answerChecked" (click)="nextQuestion()">
+          {{ currentIndex + 1 === questions.length ? 'Finalizar' : 'Siguiente' }}
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (!loading && gameFinished) {
+    <p class="state-msg state-ok">{{ statusMessage }}</p>
+    <button type="button" class="main-btn" (click)="restartGame()">Jugar de nuevo</button>
+  }
+</section>

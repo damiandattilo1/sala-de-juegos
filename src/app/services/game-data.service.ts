@@ -34,6 +34,27 @@ export interface HigherLowerResult {
   createdAt?: Timestamp;
 }
 
+export interface TriviaResult {
+  uid: string;
+  email: string;
+  nombre: string;
+  aciertos: number;
+  totalPreguntas: number;
+  tiempoSegundos: number;
+  createdAt?: Timestamp;
+}
+
+export interface GeneralaResult {
+  uid: string;
+  email: string;
+  nombre: string;
+  puntosJugador: number;
+  puntosCpu: number;
+  rondasJugadas: number;
+  gano: boolean;
+  createdAt?: Timestamp;
+}
+
 export interface ChatMessage {
   id: string;
   uid: string;
@@ -60,6 +81,48 @@ export class GameDataService {
       ...result,
       createdAt: serverTimestamp()
     });
+  }
+
+  async saveTriviaResult(result: Omit<TriviaResult, 'createdAt'>): Promise<void> {
+    await addDoc(collection(this.db, 'resultados_preguntados'), {
+      ...result,
+      createdAt: serverTimestamp()
+    });
+  }
+
+  async saveGeneralaResult(result: Omit<GeneralaResult, 'createdAt'>): Promise<void> {
+    await addDoc(collection(this.db, 'resultados_generala'), {
+      ...result,
+      createdAt: serverTimestamp()
+    });
+  }
+
+  subscribeHangmanResults(
+    onResults: (results: HangmanResult[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    return this.subscribeCollection<HangmanResult>('resultados_ahorcado', onResults, onError);
+  }
+
+  subscribeHigherLowerResults(
+    onResults: (results: HigherLowerResult[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    return this.subscribeCollection<HigherLowerResult>('resultados_mayor_menor', onResults, onError);
+  }
+
+  subscribeTriviaResults(
+    onResults: (results: TriviaResult[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    return this.subscribeCollection<TriviaResult>('resultados_preguntados', onResults, onError);
+  }
+
+  subscribeGeneralaResults(
+    onResults: (results: GeneralaResult[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    return this.subscribeCollection<GeneralaResult>('resultados_generala', onResults, onError);
   }
 
   async sendChatMessage(uid: string, email: string, nombre: string, mensaje: string): Promise<void> {
@@ -96,6 +159,32 @@ export class GameDataService {
         });
 
         onMessages(messages);
+      },
+      (error) => {
+        onError?.(error.message);
+      }
+    );
+  }
+
+  private subscribeCollection<T extends { createdAt?: Timestamp }>(
+    collectionName: string,
+    onResults: (results: T[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    const resultsQuery = query(collection(this.db, collectionName), orderBy('createdAt', 'desc'));
+
+    return onSnapshot(
+      resultsQuery,
+      (snapshot) => {
+        const results = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data() as Record<string, unknown>;
+          return {
+            ...data,
+            createdAt: data['createdAt'] as Timestamp | undefined
+          } as T;
+        });
+
+        onResults(results);
       },
       (error) => {
         onError?.(error.message);

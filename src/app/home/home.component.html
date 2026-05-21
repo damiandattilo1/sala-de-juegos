@@ -22,18 +22,24 @@
         <p>Conversá en tiempo real con otros jugadores.</p>
         <button class="btn-auth" routerLink="/chat" [skipLocationChange]="true">Entrar al chat</button>
       </div>
-      <div class="game-card game-card-disabled">
+      <a class="game-card" routerLink="/preguntados" [skipLocationChange]="true">
         <div class="game-icon">❓</div>
         <h3>Preguntados</h3>
-        <p>Respondé preguntas de trivia.</p>
-        <span class="badge">Próximamente</span>
-      </div>
-      <div class="game-card game-card-disabled">
+        <p>Respondé 10 preguntas de trivia usando OpenTDB.</p>
+        <span class="badge badge-live">Jugar</span>
+      </a>
+      <a class="game-card" routerLink="/generala-simple" [skipLocationChange]="true">
         <div class="game-icon">🎲</div>
         <h3>Generala Simple</h3>
-        <p>Probá tu suerte con los dados.</p>
-        <span class="badge">Próximamente</span>
-      </div>
+        <p>5 dados por turno: Generala, Poker, Full o sin juego.</p>
+        <span class="badge badge-live">Jugar</span>
+      </a>
+      <a class="game-card" routerLink="/resultados" [skipLocationChange]="true">
+        <div class="game-icon">📊</div>
+        <h3>Resultados</h3>
+        <p>Revisá los rankings de los 4 juegos.</p>
+        <span class="badge badge-live">Ver</span>
+      </a>
     </div>
   } @else {
     <p class="subtitle">Registrate o iniciá sesión para acceder a los juegos</p>

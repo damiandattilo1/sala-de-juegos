@@ -1,0 +1,100 @@
+<section class="resultados-container animate-fade-in-up">
+  <h2>Resultados</h2>
+  <p class="subtitle">Ranking general de los 4 juegos del Sprint 4.</p>
+
+  @if (errorMessage) {
+    <p class="error-msg">{{ errorMessage }}</p>
+  }
+
+  <article class="table-card">
+    <h3>Ahorcado</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Estado</th>
+          <th>Tiempo</th>
+          <th>Letras</th>
+          <th>Palabra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of hangmanResults">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.gano ? 'Ganó' : 'Perdió' }}</td>
+          <td>{{ item.tiempoSegundos }}s</td>
+          <td>{{ item.letrasSeleccionadas }}</td>
+          <td>{{ item.palabra }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="table-card">
+    <h3>Mayor o Menor</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Aciertos</th>
+          <th>Rondas</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of higherLowerResults">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.aciertos }}</td>
+          <td>{{ item.rondasJugadas }}</td>
+          <td>{{ item.gano ? 'Ganó' : 'Perdió' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="table-card">
+    <h3>Preguntados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Aciertos</th>
+          <th>Preguntas</th>
+          <th>Tiempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of triviaResults">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.aciertos }}</td>
+          <td>{{ item.totalPreguntas }}</td>
+          <td>{{ item.tiempoSegundos }}s</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="table-card">
+    <h3>Generala Simple</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Puntos jugador</th>
+          <th>Puntos CPU</th>
+          <th>Rondas</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of generalaResults">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.puntosJugador }}</td>
+          <td>{{ item.puntosCpu }}</td>
+          <td>{{ item.rondasJugadas }}</td>
+          <td>{{ item.gano ? 'Ganó' : 'Perdió' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>
