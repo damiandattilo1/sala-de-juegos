@@ -135,7 +135,8 @@ export class GeneralaSimpleComponent implements OnInit, OnDestroy {
       return { label: 'Full', points: 50 };
     }
 
-    return { label: 'Sin juego', points: 10 };
+    const total = dice.reduce((acc, value) => acc + value, 0);
+    return { label: 'Sin juego', points: total };
   }
 
   private async persistResult(): Promise<void> {
