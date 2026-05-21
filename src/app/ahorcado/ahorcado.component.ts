@@ -23,7 +23,9 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
     'AHORCADO',
     'SERVICIO',
     'ROUTER',
-    'AUTENTICACION'
+    'AUTENTICACION',
+    'VERCEL',
+    'GITHUB'
   ];
 
   readonly alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
