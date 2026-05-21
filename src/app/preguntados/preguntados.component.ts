@@ -5,6 +5,7 @@ import { User } from 'firebase/auth';
 import { Subscription, firstValueFrom } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { GameDataService } from '../services/game-data.service';
+import { TranslationService } from '../services/translation.service';
 
 interface OpenTdbResponse {
   response_code: number;
@@ -27,6 +28,14 @@ interface TriviaQuestion {
   correctAnswer: string;
 }
 
+interface PreparedQuestion {
+  category: string;
+  difficulty: string;
+  question: string;
+  correctAnswer: string;
+  wrongAnswers: string[];
+}
+
 @Component({
   selector: 'app-preguntados',
   standalone: true,
@@ -35,7 +44,7 @@ interface TriviaQuestion {
   styleUrl: './preguntados.component.css'
 })
 export class PreguntadosComponent implements OnInit, OnDestroy {
-  private readonly apiUrl = 'https://opentdb.com/api.php?amount=10&type=multiple';
+  private readonly apiUrl = 'https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple';
 
   user: User | null = null;
   userName = 'Jugador';
@@ -59,7 +68,8 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
   constructor(
     private readonly http: HttpClient,
     private readonly authService: AuthService,
-    private readonly gameDataService: GameDataService
+    private readonly gameDataService: GameDataService,
+    private readonly translationService: TranslationService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -146,16 +156,42 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
         throw new Error('Sin preguntas disponibles en este momento.');
       }
 
-      this.questions = response.results.map((item) => {
-        const correct = this.decodeHtml(item.correct_answer);
-        const wrong = item.incorrect_answers.map((answer) => this.decodeHtml(answer));
+      const preparedQuestions: PreparedQuestion[] = response.results.map((item) => ({
+        category: this.normalizeText(item.category),
+        difficulty: this.normalizeText(item.difficulty),
+        question: this.normalizeText(item.question),
+        correctAnswer: this.normalizeText(item.correct_answer),
+        wrongAnswers: item.incorrect_answers.map((answer) => this.normalizeText(answer))
+      }));
+
+      const valuesToTranslate = preparedQuestions.flatMap((item) => [
+        item.category,
+        item.difficulty,
+        item.question,
+        item.correctAnswer,
+        ...item.wrongAnswers
+      ]);
+
+      const translatedValues = await this.translationService.translateMany(valuesToTranslate, 'en', 'es');
+      let translatedIndex = 0;
+
+      this.questions = preparedQuestions.map((_) => {
+          const category = this.normalizeText(translatedValues[translatedIndex++] ?? '');
+          const difficulty = this.normalizeText(translatedValues[translatedIndex++] ?? '');
+          const question = this.normalizeText(translatedValues[translatedIndex++] ?? '');
+          const correctAnswer = this.normalizeText(translatedValues[translatedIndex++] ?? '');
+        const wrongAnswers = [
+            this.normalizeText(translatedValues[translatedIndex++] ?? ''),
+            this.normalizeText(translatedValues[translatedIndex++] ?? ''),
+            this.normalizeText(translatedValues[translatedIndex++] ?? '')
+        ];
 
         return {
-          category: this.decodeHtml(item.category),
-          difficulty: this.decodeHtml(item.difficulty),
-          question: this.decodeHtml(item.question),
-          answers: this.shuffle([correct, ...wrong]),
-          correctAnswer: correct
+          category,
+          difficulty,
+          question,
+          answers: this.shuffle([correctAnswer, ...wrongAnswers]),
+          correctAnswer
         };
       });
     } catch (error) {
@@ -179,6 +215,13 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
     const parser = new DOMParser();
     const doc = parser.parseFromString(value, 'text/html');
     return doc.documentElement.textContent ?? value;
+  }
+
+  private normalizeText(value: string): string {
+    return this.decodeHtml(value)
+      .replace(/[\u0000-\u001F\u007F]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   private async persistResult(): Promise<void> {
