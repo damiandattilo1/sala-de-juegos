@@ -1,0 +1,73 @@
+.mayor-menor-container {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+h2 {
+  margin: 0;
+  color: #a78bfa;
+}
+
+.subtitle {
+  color: #b8b8c7;
+  margin-bottom: 1rem;
+}
+
+.card-box {
+  width: 180px;
+  margin: 0 auto;
+  background: #f8fafc;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 0.8rem;
+  border: 3px solid #a78bfa;
+}
+
+.card-label {
+  margin: 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+.card-value {
+  margin: 0.2rem 0 0;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.status {
+  margin: 1rem 0 0.5rem;
+  color: #dfe4f3;
+}
+
+.stats {
+  margin: 0 0 1rem;
+  color: #9fb0d8;
+}
+
+.actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.action-btn,
+.restart-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #16a34a;
+  color: #fff;
+}
+
+.action-btn-alt {
+  background: #0369a1;
+}
+
+.restart-btn {
+  background: #a78bfa;
+}

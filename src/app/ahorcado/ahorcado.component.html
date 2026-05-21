@@ -1,0 +1,26 @@
+<section class="ahorcado-container animate-fade-in-up">
+  <h2>Ahorcado</h2>
+  <p class="subtitle">Adiviná la palabra usando solo los botones del abecedario.</p>
+
+  <div class="status-box">
+    <p class="word">{{ maskedWord }}</p>
+    <p class="attempts">Errores: {{ wrongAttempts }} / {{ maxErrors }} | Intentos restantes: {{ remainingAttempts }}</p>
+  </div>
+
+  <div class="alphabet-grid">
+    <button
+      *ngFor="let letter of alphabet"
+      type="button"
+      class="letter-btn"
+      [disabled]="isLetterUsed(letter)"
+      (click)="selectLetter(letter)"
+    >
+      {{ letter }}
+    </button>
+  </div>
+
+  @if (gameFinished) {
+    <p class="result-text" [class.result-ok]="won" [class.result-fail]="!won">{{ statusMessage }}</p>
+    <button type="button" class="restart-btn" (click)="startNewGame()">Jugar otra vez</button>
+  }
+</section>

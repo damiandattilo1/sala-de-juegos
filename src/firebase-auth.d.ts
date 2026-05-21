@@ -56,13 +56,36 @@ declare module 'firebase/firestore' {
 
   export interface Firestore {}
   export interface DocumentReference<T = any> {}
+  export interface Query<T = any> {}
+  export interface QueryConstraint {}
+  export interface QueryDocumentSnapshot<T = any> {
+    id: string;
+    data(): T;
+  }
+  export interface QuerySnapshot<T = any> {
+    docs: Array<QueryDocumentSnapshot<T>>;
+  }
+  export interface Timestamp {
+    toDate(): Date;
+  }
   export interface DocumentSnapshot<T = any> {
     exists(): boolean;
     data(): T | undefined;
   }
+  export type Unsubscribe = () => void;
 
   export function getFirestore(app?: FirebaseApp): Firestore;
   export function doc(firestore: Firestore, path: string, ...pathSegments: string[]): DocumentReference;
+  export function collection(firestore: Firestore, path: string): Query;
   export function setDoc<T = any>(reference: DocumentReference, data: T): Promise<void>;
   export function getDoc<T = any>(reference: DocumentReference): Promise<DocumentSnapshot<T>>;
+  export function addDoc<T = any>(reference: Query<T>, data: T): Promise<DocumentReference<T>>;
+  export function query<T = any>(baseQuery: Query<T>, ...queryConstraints: QueryConstraint[]): Query<T>;
+  export function orderBy(fieldPath: string, directionStr?: 'asc' | 'desc'): QueryConstraint;
+  export function serverTimestamp(): any;
+  export function onSnapshot<T = any>(
+    query: Query<T>,
+    onNext: (snapshot: QuerySnapshot<T>) => void,
+    onError?: (error: Error) => void
+  ): Unsubscribe;
 }

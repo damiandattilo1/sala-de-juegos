@@ -36,6 +36,11 @@
 - Home condicional: muestra bienvenida personalizada si el usuario está autenticado.
 - Navegación condicional: muestra Login/Registro cuando no hay sesión, y Cerrar Sesión cuando sí hay.
 
-### Sprint #3 *(próximamente)*
+### Sprint #3
+- Juego **Ahorcado** implementado con entrada por botones del abecedario.
+- Juego **Mayor o Menor** implementado con baraja española.
+- **Chat global en tiempo real** para usuarios logueados.
+- Persistencia en Firestore de resultados de Ahorcado y Mayor o Menor.
+- Persistencia en Firestore de mensajes del chat (usuario, mensaje, fecha/hora).
 
 ### Sprint #4 *(próximamente)*

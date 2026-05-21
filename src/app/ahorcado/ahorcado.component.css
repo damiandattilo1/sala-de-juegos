@@ -1,0 +1,86 @@
+.ahorcado-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  color: #a78bfa;
+}
+
+.subtitle {
+  color: #b8b8c7;
+  margin-bottom: 1rem;
+}
+
+.status-box {
+  background: #1f1f33;
+  border: 1px solid #2d2d49;
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.word {
+  font-size: 2rem;
+  letter-spacing: 0.25rem;
+  margin: 0 0 0.6rem;
+}
+
+.attempts {
+  margin: 0;
+  color: #d5d5e3;
+}
+
+.alphabet-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+}
+
+.letter-btn {
+  border: 1px solid #4b4b70;
+  background: #2a2a42;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.55rem 0;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.letter-btn:hover:not(:disabled) {
+  background: #3b3b5d;
+  transform: translateY(-1px);
+}
+
+.letter-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.result-text {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.result-ok {
+  color: #22c55e;
+}
+
+.result-fail {
+  color: #f87171;
+}
+
+.restart-btn {
+  margin-top: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background: #a78bfa;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}

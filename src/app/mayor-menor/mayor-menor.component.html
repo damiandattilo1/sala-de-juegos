@@ -1,0 +1,19 @@
+<section class="mayor-menor-container animate-fade-in-up">
+  <h2>Mayor o Menor</h2>
+  <p class="subtitle">Cartas de baraja española. Decidí si la próxima carta es mayor o menor.</p>
+
+  <div class="card-box" *ngIf="currentCard !== null">
+    <p class="card-label">Carta actual</p>
+    <p class="card-value">{{ currentCard }}</p>
+  </div>
+
+  <p class="status">{{ statusMessage }}</p>
+  <p class="stats">Aciertos: {{ aciertos }} | Rondas: {{ rondas }}</p>
+
+  <div class="actions" *ngIf="!gameOver">
+    <button type="button" class="action-btn" (click)="guess('mayor')">Mayor</button>
+    <button type="button" class="action-btn action-btn-alt" (click)="guess('menor')">Menor</button>
+  </div>
+
+  <button type="button" class="restart-btn" *ngIf="gameOver" (click)="startGame()">Jugar otra partida</button>
+</section>

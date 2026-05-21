@@ -4,25 +4,31 @@
   @if (user) {
     <p class="subtitle">Elegí un juego y poné a prueba tu suerte</p>
     <div class="games-grid">
-      <div class="game-card">
+      <a class="game-card" routerLink="/ahorcado" [skipLocationChange]="true">
         <div class="game-icon">🔤</div>
         <h3>Ahorcado</h3>
         <p>Adivina la palabra letra por letra.</p>
-        <span class="badge">Próximamente</span>
-      </div>
-      <div class="game-card">
+        <span class="badge badge-live">Jugar</span>
+      </a>
+      <a class="game-card" routerLink="/mayor-menor" [skipLocationChange]="true">
         <div class="game-icon">🃏</div>
         <h3>Mayor o Menor</h3>
         <p>¿La siguiente carta será mayor o menor?</p>
-        <span class="badge">Próximamente</span>
+        <span class="badge badge-live">Jugar</span>
+      </a>
+      <div class="game-card game-card-disabled">
+        <div class="game-icon">💬</div>
+        <h3>Chat Global</h3>
+        <p>Conversá en tiempo real con otros jugadores.</p>
+        <button class="btn-auth" routerLink="/chat" [skipLocationChange]="true">Entrar al chat</button>
       </div>
-      <div class="game-card">
+      <div class="game-card game-card-disabled">
         <div class="game-icon">❓</div>
         <h3>Preguntados</h3>
         <p>Respondé preguntas de trivia.</p>
         <span class="badge">Próximamente</span>
       </div>
-      <div class="game-card">
+      <div class="game-card game-card-disabled">
         <div class="game-icon">🎲</div>
         <h3>Generala Simple</h3>
         <p>Probá tu suerte con los dados.</p>
