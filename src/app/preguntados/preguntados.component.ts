@@ -1,24 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'firebase/auth';
-import { Subscription, firstValueFrom } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { GameDataService } from '../services/game-data.service';
 import { TranslationService } from '../services/translation.service';
-
-interface OpenTdbResponse {
-  response_code: number;
-  results: OpenTdbQuestion[];
-}
-
-interface OpenTdbQuestion {
-  category: string;
-  difficulty: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
+import { TriviaApiService } from '../services/trivia-api.service';
 
 interface TriviaQuestion {
   category: string;
@@ -44,8 +31,6 @@ interface PreparedQuestion {
   styleUrl: './preguntados.component.css'
 })
 export class PreguntadosComponent implements OnInit, OnDestroy {
-  private readonly apiUrl = 'https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple';
-
   user: User | null = null;
   userName = 'Jugador';
 
@@ -66,10 +51,10 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
   private userSub?: Subscription;
 
   constructor(
-    private readonly http: HttpClient,
     private readonly authService: AuthService,
     private readonly gameDataService: GameDataService,
-    private readonly translationService: TranslationService
+    private readonly translationService: TranslationService,
+    private readonly triviaApiService: TriviaApiService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -151,7 +136,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
     this.startTime = Date.now();
 
     try {
-      const response = await firstValueFrom(this.http.get<OpenTdbResponse>(this.apiUrl));
+      const response = await this.triviaApiService.getMultipleChoiceQuestions(10, 'easy');
       if (!response || !response.results || response.results.length === 0) {
         throw new Error('Sin preguntas disponibles en este momento.');
       }
