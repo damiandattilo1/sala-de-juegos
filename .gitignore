@@ -48,3 +48,8 @@ PROGRAMACION IV - TP Sala de Juegos #1.txt
 # firebase logs and deploys
 firebase-debug.log
 .firebase/hosting*
+
+# Playwright
+/playwright-report
+/test-results
+/.playwright
