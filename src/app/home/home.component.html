@@ -1,15 +1,7 @@
 <div class="home-container animate-fade-in">
-  <h2>Bienvenido a la Sala de Juegos</h2>
-  <p class="subtitle">Próximamente podrás elegir un juego y poner a prueba tu suerte</p>
-</div>
-<div class="home-container animate-fade-in">
   <h2>Sala de Juegos</h2>
 
   @if (user) {
-    <div class="user-info">
-      <span class="user-name">👤 {{ nombreUsuario || user.email }}</span>
-      <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
-    </div>
     <p class="subtitle">Elegí un juego y poné a prueba tu suerte</p>
     <div class="games-grid">
       <div class="game-card">
@@ -40,8 +32,8 @@
   } @else {
     <p class="subtitle">Registrate o iniciá sesión para acceder a los juegos</p>
     <div class="auth-btns">
-      <button class="btn-auth" routerLink="/login">Iniciar Sesión</button>
-      <button class="btn-auth btn-auth-outline" routerLink="/registro">Registrarse</button>
+      <button class="btn-auth" routerLink="/ingresar" [skipLocationChange]="true">Iniciar Sesión</button>
+      <button class="btn-auth btn-auth-outline" routerLink="/registro" [skipLocationChange]="true">Registrarse</button>
     </div>
   }
 </div>

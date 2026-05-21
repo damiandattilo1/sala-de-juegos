@@ -1,43 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-@Component({
-  selector: 'app-registro',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './registro.component.html',
-  styleUrl: './registro.component.css'
-})
-export class RegistroComponent {
-  nombre = '';
-  email = '';
-  password = '';
-  confirmPassword = '';
-  error = '';
-  success = '';
-
-  constructor(private router: Router) {}
-
-  onSubmit() {
-    if (!this.nombre || !this.email || !this.password || !this.confirmPassword) {
-      this.error = 'Por favor completá todos los campos.';
-      this.success = '';
-      return;
-    }
-    if (this.password !== this.confirmPassword) {
-      this.error = 'Las contraseñas no coinciden.';
-      this.success = '';
-      return;
-    }
-    this.error = '';
-    this.success = '¡Registro exitoso! Redirigiendo...';
-    setTimeout(() => this.router.navigate(['/ingresar']), 1500);
-  }
-}
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -81,7 +44,7 @@ export class RegistroComponent {
     try {
       await this.authService.register(this.email, this.password, this.nombre, this.apellido, this.edad);
       this.success = '¡Registro exitoso! Redirigiendo...';
-      setTimeout(() => this.router.navigate(['/home']), 1500);
+      setTimeout(() => this.router.navigate(['/']), 1500);
     } catch (e: any) {
       if (e.code === 'auth/email-already-in-use') {
         this.error = 'El email ya está registrado.';

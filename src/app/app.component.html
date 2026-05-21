@@ -4,32 +4,21 @@
     <span>Sala de Juegos</span>
   </h1>
   <nav>
-    <button routerLink="/" class="nav-btn">Home</button>
-    <button routerLink="/ingresar" class="nav-btn">Login</button>
-    <button routerLink="/registro" class="nav-btn">Registro</button>
-    <button routerLink="/quien-soy" class="nav-btn">Quién Soy</button>
-  </nav>
-</header>
-
-<main [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-  <img src="assets/logo.png" alt="Logo Sala de Juegos" class="brand-logo bottom-logo" />
-</main><header class="app-header">
-  <h1>Sala de Juegos 🎲</h1>
-  <nav>
     @if (currentUser) {
-      <button routerLink="home" class="nav-btn">Home</button>
-      <button routerLink="quien-soy" class="nav-btn">Quién Soy</button>
+      <button routerLink="/" [skipLocationChange]="true" class="nav-btn">Home</button>
+      <button routerLink="/quien-soy" [skipLocationChange]="true" class="nav-btn">Quién Soy</button>
       <span class="user-email">{{ currentUser.email }}</span>
       <button (click)="logout()" class="nav-btn nav-btn-logout">Cerrar Sesión</button>
     } @else {
-      <button routerLink="login" class="nav-btn">Login</button>
-      <button routerLink="registro" class="nav-btn">Registro</button>
-      <button routerLink="quien-soy" class="nav-btn">Quién Soy</button>
+      <button routerLink="/" [skipLocationChange]="true" class="nav-btn">Home</button>
+      <button routerLink="/ingresar" [skipLocationChange]="true" class="nav-btn">Login</button>
+      <button routerLink="/registro" [skipLocationChange]="true" class="nav-btn">Registro</button>
+      <button routerLink="/quien-soy" [skipLocationChange]="true" class="nav-btn">Quién Soy</button>
     }
   </nav>
 </header>
 
 <main [@routeAnimations]="prepareRoute(outlet)">
   <router-outlet #outlet="outlet"></router-outlet>
+  <img src="assets/logo.png" alt="Logo Sala de Juegos" class="brand-logo bottom-logo" />
 </main>
