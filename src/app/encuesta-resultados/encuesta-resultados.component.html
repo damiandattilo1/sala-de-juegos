@@ -141,7 +141,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (s of surveys; track s.uid + (s.createdAt?.toString() ?? '')) {
+            @for (s of surveys; track $index) {
               <tr>
                 <td>{{ s.nombreApellido }}</td>
                 <td class="email-cell">{{ s.email }}</td>

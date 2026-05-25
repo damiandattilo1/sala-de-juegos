@@ -49,3 +49,16 @@
 - Juego propio **Generala Simple** implementado con reglas, condición de victoria/derrota y persistencia de resultados.
 - Página **Resultados** agregada con 4 tablas (Ahorcado, Mayor o Menor, Preguntados y Generala).
 - Rankings ordenados de mejor desempeño/puntaje a peor para cada juego.
+
+### Sprint #5 — Recuperatorio
+- **Encuesta de satisfacción** con formulario reactivo y validaciones:
+  - Datos personales: nombre/apellido, edad (18–99), teléfono (solo dígitos, máx. 10).
+  - 4 preguntas con controles distintos: radio button, checkbox (múltiple), select y textarea.
+  - Todos los campos requeridos con mensajes de error específicos.
+  - Respuestas guardadas en Firestore identificando al usuario.
+  - Aviso si el usuario ya respondió la encuesta (sin bloquear el reenvío).
+- **Resultados de encuestas** accesibles solo para administradores (`adminGuard`):
+  - Tab "Indicadores": tarjetas resumen + 3 gráficos de barras SVG (frecuencia, juego favorito, géneros).
+  - Tab "Registros": tabla completa con todas las respuestas individuales.
+- **Animaciones de transición de rutas** mejoradas (enter + leave con fade y slide).
+- Datos de prueba precargados en Firestore para los 3 usuarios de testing.
