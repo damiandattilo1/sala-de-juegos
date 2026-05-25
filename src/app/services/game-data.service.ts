@@ -55,6 +55,19 @@ export interface GeneralaResult {
   createdAt?: Timestamp;
 }
 
+export interface SurveyResult {
+  uid: string;
+  email: string;
+  nombreApellido: string;
+  edad: number;
+  telefono: string;
+  frecuenciaJuego: string;
+  generosJuegos: string[];
+  juegoFavorito: string;
+  sugerencia: string;
+  createdAt?: Timestamp;
+}
+
 export interface ChatMessage {
   id: string;
   uid: string;
@@ -164,6 +177,20 @@ export class GameDataService {
         onError?.(error.message);
       }
     );
+  }
+
+  async saveSurveyResult(result: Omit<SurveyResult, 'createdAt'>): Promise<void> {
+    await addDoc(collection(this.db, 'encuestas'), {
+      ...result,
+      createdAt: serverTimestamp()
+    });
+  }
+
+  subscribeSurveyResults(
+    onResults: (results: SurveyResult[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    return this.subscribeCollection<SurveyResult>('encuestas', onResults, onError);
   }
 
   private subscribeCollection<T extends { createdAt?: Timestamp }>(

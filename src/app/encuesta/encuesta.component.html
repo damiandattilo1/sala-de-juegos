@@ -1,0 +1,161 @@
+<section class="encuesta-container animate-fade-in-up">
+  <h2>Encuesta de Satisfacción</h2>
+  <p class="subtitle">Contanos tu experiencia en la Sala de Juegos</p>
+
+  @if (successMsg) {
+    <div class="alert alert-success">{{ successMsg }}</div>
+  }
+  @if (errorMsg) {
+    <div class="alert alert-error">{{ errorMsg }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="survey-form">
+
+    <!-- ── Datos Personales ────────────────────────────── -->
+    <fieldset class="form-section">
+      <legend>Datos Personales</legend>
+
+      <div class="form-group">
+        <label for="nombreApellido">Nombre y Apellido *</label>
+        <input
+          id="nombreApellido"
+          type="text"
+          formControlName="nombreApellido"
+          placeholder="Ej: Juan Pérez"
+          [class.invalid]="submitted && f['nombreApellido'].invalid"
+        />
+        @if (submitted && f['nombreApellido'].errors?.['required']) {
+          <span class="error-hint">El nombre y apellido es requerido.</span>
+        }
+        @if (submitted && f['nombreApellido'].errors?.['minlength']) {
+          <span class="error-hint">Debe tener al menos 3 caracteres.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="edad">Edad *</label>
+        <input
+          id="edad"
+          type="number"
+          formControlName="edad"
+          placeholder="Entre 18 y 99"
+          [class.invalid]="submitted && f['edad'].invalid"
+        />
+        @if (submitted && f['edad'].errors?.['required']) {
+          <span class="error-hint">La edad es requerida.</span>
+        }
+        @if (submitted && (f['edad'].errors?.['min'] || f['edad'].errors?.['max'])) {
+          <span class="error-hint">La edad debe estar entre 18 y 99 años.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Número de Teléfono *</label>
+        <input
+          id="telefono"
+          type="text"
+          formControlName="telefono"
+          placeholder="Solo números, máx. 10 dígitos"
+          maxlength="10"
+          [class.invalid]="submitted && f['telefono'].invalid"
+        />
+        @if (submitted && f['telefono'].errors?.['required']) {
+          <span class="error-hint">El número de teléfono es requerido.</span>
+        }
+        @if (submitted && f['telefono'].errors?.['pattern']) {
+          <span class="error-hint">Solo se permiten números (máximo 10 dígitos).</span>
+        }
+      </div>
+    </fieldset>
+
+    <!-- ── Pregunta 1: Radio ───────────────────────────── -->
+    <fieldset class="form-section">
+      <legend>Pregunta 1: Frecuencia de juego</legend>
+      <p class="question-text">¿Con qué frecuencia jugás videojuegos? *</p>
+
+      <div class="radio-group" [class.invalid-group]="submitted && f['frecuenciaJuego'].invalid">
+        @for (opcion of frecuencias; track opcion) {
+          <label class="radio-label">
+            <input
+              type="radio"
+              formControlName="frecuenciaJuego"
+              [value]="opcion"
+            />
+            {{ opcion }}
+          </label>
+        }
+      </div>
+      @if (submitted && f['frecuenciaJuego'].errors?.['required']) {
+        <span class="error-hint">Seleccioná una opción.</span>
+      }
+    </fieldset>
+
+    <!-- ── Pregunta 2: Checkbox ───────────────────────── -->
+    <fieldset class="form-section" formGroupName="generosJuegos">
+      <legend>Pregunta 2: Géneros preferidos</legend>
+      <p class="question-text">¿Qué géneros de juegos te gustan? (seleccioná al menos uno) *</p>
+
+      <div class="checkbox-group" [class.invalid-group]="submitted && generosCtrl.invalid">
+        @for (genero of generos; track genero) {
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [formControlName]="genero"
+            />
+            {{ genero }}
+          </label>
+        }
+      </div>
+      @if (submitted && generosCtrl.errors?.['atLeastOne']) {
+        <span class="error-hint">Seleccioná al menos un género.</span>
+      }
+    </fieldset>
+
+    <!-- ── Pregunta 3: Select ─────────────────────────── -->
+    <fieldset class="form-section">
+      <legend>Pregunta 3: Juego favorito</legend>
+      <p class="question-text">¿Cuál es tu juego favorito de la Sala? *</p>
+
+      <div class="form-group">
+        <select
+          formControlName="juegoFavorito"
+          [class.invalid]="submitted && f['juegoFavorito'].invalid"
+        >
+          <option value="" disabled>-- Seleccioná un juego --</option>
+          @for (juego of juegosFavoritos; track juego) {
+            <option [value]="juego">{{ juego }}</option>
+          }
+        </select>
+        @if (submitted && f['juegoFavorito'].errors?.['required']) {
+          <span class="error-hint">Seleccioná tu juego favorito.</span>
+        }
+      </div>
+    </fieldset>
+
+    <!-- ── Pregunta 4: Textbox ───────────────────────── -->
+    <fieldset class="form-section">
+      <legend>Pregunta 4: Sugerencias</legend>
+      <p class="question-text">¿Tenés alguna sugerencia para mejorar la Sala de Juegos? *</p>
+
+      <div class="form-group">
+        <textarea
+          formControlName="sugerencia"
+          rows="4"
+          placeholder="Escribí tu sugerencia aquí..."
+          [class.invalid]="submitted && f['sugerencia'].invalid"
+        ></textarea>
+        @if (submitted && f['sugerencia'].errors?.['required']) {
+          <span class="error-hint">La sugerencia es requerida.</span>
+        }
+        @if (submitted && f['sugerencia'].errors?.['minlength']) {
+          <span class="error-hint">Debe tener al menos 5 caracteres.</span>
+        }
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn-submit" [disabled]="loading">
+      {{ loading ? 'Enviando...' : 'Enviar Encuesta' }}
+    </button>
+
+  </form>
+</section>

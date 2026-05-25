@@ -42,6 +42,11 @@ export class AuthService {
     return snap.exists() ? snap.data()['nombre'] ?? '' : '';
   }
 
+  async isAdmin(uid: string): Promise<boolean> {
+    const snap = await getDoc(doc(this.db, 'usuarios', uid));
+    return snap.exists() ? snap.data()['isAdmin'] === true : false;
+  }
+
   waitForAuthReady(): Promise<User | null> {
     return new Promise(resolve => {
       const unsubscribe = onAuthStateChanged(this.auth, user => {

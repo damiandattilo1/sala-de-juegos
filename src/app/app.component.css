@@ -50,8 +50,33 @@ nav {
   border-color: #a78bfa;
 }
 
+.nav-btn-logout {
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+.nav-btn-logout:hover {
+  background: #991b1b;
+  border-color: #991b1b;
+  color: #fff;
+}
+
+.nav-btn-admin {
+  color: #fde68a;
+  border-color: #92400e;
+}
+
+.nav-btn-admin:hover {
+  background: #b45309;
+  border-color: #b45309;
+  color: #fff;
+}
+
 main {
   padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
 }
 
 .bottom-logo {

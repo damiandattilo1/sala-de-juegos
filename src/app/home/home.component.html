@@ -40,6 +40,12 @@
         <p>Revisá los rankings de los 4 juegos.</p>
         <span class="badge badge-live">Ver</span>
       </a>
+      <a class="game-card" routerLink="/encuesta" [skipLocationChange]="true">
+        <div class="game-icon">📝</div>
+        <h3>Encuesta</h3>
+        <p>Completá nuestra encuesta de satisfacción.</p>
+        <span class="badge badge-live">Responder</span>
+      </a>
     </div>
   } @else {
     <p class="subtitle">Registrate o iniciá sesión para acceder a los juegos</p>

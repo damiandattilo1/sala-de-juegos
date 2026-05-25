@@ -12,6 +12,10 @@
       <button routerLink="/generala-simple" [skipLocationChange]="true" class="nav-btn">Generala</button>
       <button routerLink="/chat" [skipLocationChange]="true" class="nav-btn">Chat</button>
       <button routerLink="/resultados" [skipLocationChange]="true" class="nav-btn">Resultados</button>
+      <button routerLink="/encuesta" [skipLocationChange]="true" class="nav-btn">Encuesta</button>
+      @if (isAdmin) {
+        <button routerLink="/encuesta-resultados" [skipLocationChange]="true" class="nav-btn nav-btn-admin">Res. Encuesta</button>
+      }
       <button routerLink="/quien-soy" [skipLocationChange]="true" class="nav-btn">Quién Soy</button>
       <span class="user-email">{{ currentUser.email }}</span>
       <button (click)="logout()" class="nav-btn nav-btn-logout">Cerrar Sesión</button>

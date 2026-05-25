@@ -1,0 +1,54 @@
+<section class="enc-res-container animate-fade-in-up">
+  <h2>Resultados de Encuestas</h2>
+  <p class="subtitle">Vista exclusiva para administradores</p>
+
+  @if (errorMsg) {
+    <p class="error-msg">{{ errorMsg }}</p>
+  }
+
+  @if (surveys.length === 0 && !errorMsg) {
+    <p class="empty-msg">Aún no hay respuestas registradas.</p>
+  }
+
+  @if (surveys.length > 0) {
+    <p class="total-badge">Total de respuestas: {{ surveys.length }}</p>
+
+    <div class="cards-grid">
+      @for (s of surveys; track s.uid) {
+        <article class="survey-card">
+          <header class="card-header">
+            <span class="card-name">{{ s.nombreApellido }}</span>
+            <span class="card-email">{{ s.email }}</span>
+          </header>
+
+          <div class="card-body">
+            <div class="row">
+              <span class="label">Edad</span>
+              <span>{{ s.edad }} años</span>
+            </div>
+            <div class="row">
+              <span class="label">Teléfono</span>
+              <span>{{ s.telefono }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Frecuencia de juego</span>
+              <span>{{ s.frecuenciaJuego }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Géneros preferidos</span>
+              <span>{{ formatGeneros(s.generosJuegos) }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Juego favorito</span>
+              <span>{{ s.juegoFavorito }}</span>
+            </div>
+            <div class="row row-full">
+              <span class="label">Sugerencia</span>
+              <span class="sugerencia-text">{{ s.sugerencia }}</span>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>
