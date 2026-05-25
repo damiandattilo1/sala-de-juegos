@@ -8,6 +8,11 @@
   @if (errorMsg) {
     <div class="alert alert-error">{{ errorMsg }}</div>
   }
+  @if (yaRespondio && !successMsg) {
+    <div class="alert alert-warning">
+      ⚠️ Ya respondiste esta encuesta anteriormente. Podés volver a completarla si querés.
+    </div>
+  }
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="survey-form">
 

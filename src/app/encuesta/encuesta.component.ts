@@ -38,7 +38,14 @@ export class EncuestaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(u => this.currentUser = u);
+    this.authService.currentUser$.subscribe(async u => {
+      this.currentUser = u;
+      if (u) {
+        this.yaRespondio = await this.gameDataService.checkUserHasSurvey(u.uid);
+      } else {
+        this.yaRespondio = false;
+      }
+    });
 
     const generosGroup: Record<string, boolean[]> = {};
     this.generos.forEach(g => { generosGroup[g] = [false]; });

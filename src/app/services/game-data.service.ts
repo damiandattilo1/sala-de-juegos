@@ -5,11 +5,14 @@ import {
   Timestamp,
   addDoc,
   collection,
+  getDocs,
   getFirestore,
+  limit,
   onSnapshot,
   orderBy,
   query,
-  serverTimestamp
+  serverTimestamp,
+  where
 } from 'firebase/firestore';
 import { firebaseConfig } from '../../environments/environment';
 
@@ -191,6 +194,12 @@ export class GameDataService {
     onError?: (errorMessage: string) => void
   ): () => void {
     return this.subscribeCollection<SurveyResult>('encuestas', onResults, onError);
+  }
+
+  async checkUserHasSurvey(uid: string): Promise<boolean> {
+    const q = query(collection(this.db, 'encuestas'), where('uid', '==', uid), limit(1));
+    const snap = await getDocs(q);
+    return !snap.empty;
   }
 
   private subscribeCollection<T extends { createdAt?: Timestamp }>(

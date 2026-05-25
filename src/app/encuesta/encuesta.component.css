@@ -36,6 +36,12 @@ h2 {
   color: #fca5a5;
 }
 
+.alert-warning {
+  background: #92400e22;
+  border: 1px solid #f59e0b66;
+  color: #fde68a;
+}
+
 .survey-form {
   display: flex;
   flex-direction: column;

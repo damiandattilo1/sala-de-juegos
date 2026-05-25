@@ -64,6 +64,8 @@ declare module 'firebase/firestore' {
   }
   export interface QuerySnapshot<T = any> {
     docs: Array<QueryDocumentSnapshot<T>>;
+    empty: boolean;
+    size: number;
   }
   export interface Timestamp {
     toDate(): Date;
@@ -82,6 +84,9 @@ declare module 'firebase/firestore' {
   export function addDoc<T = any>(reference: Query<T>, data: T): Promise<DocumentReference<T>>;
   export function query<T = any>(baseQuery: Query<T>, ...queryConstraints: QueryConstraint[]): Query<T>;
   export function orderBy(fieldPath: string, directionStr?: 'asc' | 'desc'): QueryConstraint;
+  export function where(fieldPath: string, opStr: string, value: any): QueryConstraint;
+  export function limit(n: number): QueryConstraint;
+  export function getDocs<T = any>(query: Query<T>): Promise<QuerySnapshot<T>>;
   export function serverTimestamp(): any;
   export function onSnapshot<T = any>(
     query: Query<T>,

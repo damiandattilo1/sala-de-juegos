@@ -11,44 +11,153 @@
   }
 
   @if (surveys.length > 0) {
-    <p class="total-badge">Total de respuestas: {{ surveys.length }}</p>
 
-    <div class="cards-grid">
-      @for (s of surveys; track s.uid) {
-        <article class="survey-card">
-          <header class="card-header">
-            <span class="card-name">{{ s.nombreApellido }}</span>
-            <span class="card-email">{{ s.email }}</span>
-          </header>
-
-          <div class="card-body">
-            <div class="row">
-              <span class="label">Edad</span>
-              <span>{{ s.edad }} años</span>
-            </div>
-            <div class="row">
-              <span class="label">Teléfono</span>
-              <span>{{ s.telefono }}</span>
-            </div>
-            <div class="row">
-              <span class="label">Frecuencia de juego</span>
-              <span>{{ s.frecuenciaJuego }}</span>
-            </div>
-            <div class="row">
-              <span class="label">Géneros preferidos</span>
-              <span>{{ formatGeneros(s.generosJuegos) }}</span>
-            </div>
-            <div class="row">
-              <span class="label">Juego favorito</span>
-              <span>{{ s.juegoFavorito }}</span>
-            </div>
-            <div class="row row-full">
-              <span class="label">Sugerencia</span>
-              <span class="sugerencia-text">{{ s.sugerencia }}</span>
-            </div>
-          </div>
-        </article>
-      }
+    <!-- ── Sub-tabs ──────────────────────────────────── -->
+    <div class="tabs">
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'indicadores'"
+        (click)="activeTab = 'indicadores'"
+      >
+        📊 Indicadores
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'registros'"
+        (click)="activeTab = 'registros'"
+      >
+        📋 Registros individuales
+      </button>
     </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- TAB 1: INDICADORES                            -->
+    <!-- ══════════════════════════════════════════════ -->
+    @if (activeTab === 'indicadores') {
+
+      <!-- Summary cards -->
+      <div class="summary-cards">
+        <div class="summary-card">
+          <span class="summary-value">{{ totalRespuestas }}</span>
+          <span class="summary-label">Total respuestas</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-value">{{ edadPromedio }}</span>
+          <span class="summary-label">Edad promedio</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-value">{{ edadMin }}–{{ edadMax }}</span>
+          <span class="summary-label">Rango de edad</span>
+        </div>
+      </div>
+
+      <!-- Chart: Frecuencia de juego -->
+      <div class="chart-card">
+        <h3 class="chart-title">¿Con qué frecuencia jugás videojuegos?</h3>
+        <svg
+          class="chart-svg"
+          [attr.viewBox]="'0 0 480 ' + svgHeight(frecuenciaData.length)"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @for (item of frecuenciaData; track item.label; let i = $index) {
+            <g [attr.transform]="'translate(0,' + (i * 44 + 10) + ')'">
+              <text x="148" y="22" text-anchor="end" class="chart-label">{{ item.label }}</text>
+              <rect x="154" y="6" [attr.width]="barWidth(item.count, maxOf(frecuenciaData))" height="26" rx="5" [attr.fill]="chartColor(i)" opacity="0.9"/>
+              <text
+                [attr.x]="item.count > 0 ? 154 + barWidth(item.count, maxOf(frecuenciaData)) + 7 : 162"
+                y="23"
+                class="chart-count"
+              >{{ item.count }}</text>
+            </g>
+          }
+        </svg>
+      </div>
+
+      <!-- Chart: Juego favorito -->
+      <div class="chart-card">
+        <h3 class="chart-title">¿Cuál es tu juego favorito?</h3>
+        <svg
+          class="chart-svg"
+          [attr.viewBox]="'0 0 480 ' + svgHeight(juegoFavData.length)"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @for (item of juegoFavData; track item.label; let i = $index) {
+            <g [attr.transform]="'translate(0,' + (i * 44 + 10) + ')'">
+              <text x="148" y="22" text-anchor="end" class="chart-label">{{ item.label }}</text>
+              <rect x="154" y="6" [attr.width]="barWidth(item.count, maxOf(juegoFavData))" height="26" rx="5" [attr.fill]="chartColor(i)" opacity="0.9"/>
+              <text
+                [attr.x]="item.count > 0 ? 154 + barWidth(item.count, maxOf(juegoFavData)) + 7 : 162"
+                y="23"
+                class="chart-count"
+              >{{ item.count }}</text>
+            </g>
+          }
+        </svg>
+      </div>
+
+      <!-- Chart: Géneros preferidos -->
+      <div class="chart-card">
+        <h3 class="chart-title">Géneros preferidos (múltiple opción)</h3>
+        <svg
+          class="chart-svg"
+          [attr.viewBox]="'0 0 480 ' + svgHeight(generosData.length)"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @for (item of generosData; track item.label; let i = $index) {
+            <g [attr.transform]="'translate(0,' + (i * 44 + 10) + ')'">
+              <text x="148" y="22" text-anchor="end" class="chart-label">{{ item.label }}</text>
+              <rect x="154" y="6" [attr.width]="barWidth(item.count, maxOf(generosData))" height="26" rx="5" [attr.fill]="chartColor(i)" opacity="0.9"/>
+              <text
+                [attr.x]="item.count > 0 ? 154 + barWidth(item.count, maxOf(generosData)) + 7 : 162"
+                y="23"
+                class="chart-count"
+              >{{ item.count }}</text>
+            </g>
+          }
+        </svg>
+      </div>
+
+    }
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- TAB 2: REGISTROS                              -->
+    <!-- ══════════════════════════════════════════════ -->
+    @if (activeTab === 'registros') {
+      <p class="total-badge">{{ totalRespuestas }} respuestas en total</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre y Apellido</th>
+              <th>Email</th>
+              <th>Edad</th>
+              <th>Teléfono</th>
+              <th>Frecuencia</th>
+              <th>Géneros</th>
+              <th>Juego favorito</th>
+              <th>Sugerencia</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (s of surveys; track s.uid + (s.createdAt?.toString() ?? '')) {
+              <tr>
+                <td>{{ s.nombreApellido }}</td>
+                <td class="email-cell">{{ s.email }}</td>
+                <td class="center">{{ s.edad }}</td>
+                <td class="center">{{ s.telefono }}</td>
+                <td>{{ s.frecuenciaJuego }}</td>
+                <td class="generos-cell">{{ formatGeneros(s.generosJuegos) }}</td>
+                <td>{{ s.juegoFavorito }}</td>
+                <td class="sugerencia-cell">{{ s.sugerencia }}</td>
+                <td class="center date-cell">{{ formatDate(s.createdAt) }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
   }
 </section>
