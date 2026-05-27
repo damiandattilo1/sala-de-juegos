@@ -6,22 +6,8 @@ import { AuthService } from '../auth.service';
 import { GameDataService } from '../services/game-data.service';
 import { TranslationService } from '../services/translation.service';
 import { TriviaApiService } from '../services/trivia-api.service';
-
-interface TriviaQuestion {
-  category: string;
-  difficulty: string;
-  question: string;
-  answers: string[];
-  correctAnswer: string;
-}
-
-interface PreparedQuestion {
-  category: string;
-  difficulty: string;
-  question: string;
-  correctAnswer: string;
-  wrongAnswers: string[];
-}
+import { TriviaQuestion } from '../models/trivia-question.model';
+import { PreparedQuestion } from '../models/prepared-question.model';
 
 @Component({
   selector: 'app-preguntados',

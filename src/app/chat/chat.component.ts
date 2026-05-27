@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { User } from 'firebase/auth';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { ChatMessage, GameDataService } from '../services/game-data.service';
+import { GameDataService } from '../services/game-data.service';
+import { ChatMessage } from '../models/chat-message.model';
 
 @Component({
   selector: 'app-chat',

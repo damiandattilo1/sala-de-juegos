@@ -1,0 +1,2 @@
+Cada interfaz tiene que tener su archivo en models.
+Las rutas se deben cargar con Lazy Loading.

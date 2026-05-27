@@ -1,13 +1,11 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {
-  GameDataService,
-  GeneralaResult,
-  HangmanResult,
-  HigherLowerResult,
-  TriviaResult
-} from '../services/game-data.service';
+import { GameDataService } from '../services/game-data.service';
+import { HangmanResult } from '../models/hangman-result.model';
+import { HigherLowerResult } from '../models/higher-lower-result.model';
+import { TriviaResult } from '../models/trivia-result.model';
+import { GeneralaResult } from '../models/generala-result.model';
 import { Timestamp } from 'firebase/firestore';
 
 @Component({

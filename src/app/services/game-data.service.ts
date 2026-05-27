@@ -15,70 +15,14 @@ import {
   where
 } from 'firebase/firestore';
 import { firebaseConfig } from '../../environments/environment';
+import { HangmanResult } from '../models/hangman-result.model';
+import { HigherLowerResult } from '../models/higher-lower-result.model';
+import { TriviaResult } from '../models/trivia-result.model';
+import { GeneralaResult } from '../models/generala-result.model';
+import { SurveyResult } from '../models/survey-result.model';
+import { ChatMessage } from '../models/chat-message.model';
 
-export interface HangmanResult {
-  uid: string;
-  email: string;
-  nombre: string;
-  palabra: string;
-  gano: boolean;
-  tiempoSegundos: number;
-  letrasSeleccionadas: number;
-  createdAt?: Timestamp;
-}
-
-export interface HigherLowerResult {
-  uid: string;
-  email: string;
-  nombre: string;
-  aciertos: number;
-  rondasJugadas: number;
-  gano: boolean;
-  createdAt?: Timestamp;
-}
-
-export interface TriviaResult {
-  uid: string;
-  email: string;
-  nombre: string;
-  aciertos: number;
-  totalPreguntas: number;
-  tiempoSegundos: number;
-  createdAt?: Timestamp;
-}
-
-export interface GeneralaResult {
-  uid: string;
-  email: string;
-  nombre: string;
-  puntosJugador: number;
-  puntosCpu: number;
-  rondasJugadas: number;
-  gano: boolean;
-  createdAt?: Timestamp;
-}
-
-export interface SurveyResult {
-  uid: string;
-  email: string;
-  nombreApellido: string;
-  edad: number;
-  telefono: string;
-  frecuenciaJuego: string;
-  generosJuegos: string[];
-  juegoFavorito: string;
-  sugerencia: string;
-  createdAt?: Timestamp;
-}
-
-export interface ChatMessage {
-  id: string;
-  uid: string;
-  email: string;
-  nombre: string;
-  mensaje: string;
-  createdAt: Date | null;
-}
+export { HangmanResult, HigherLowerResult, TriviaResult, GeneralaResult, SurveyResult, ChatMessage };
 
 @Injectable({ providedIn: 'root' })
 export class GameDataService {

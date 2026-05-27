@@ -1,11 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameDataService, SurveyResult } from '../services/game-data.service';
-
-export interface ChartItem {
-  label: string;
-  count: number;
-}
+import { GameDataService } from '../services/game-data.service';
+import { SurveyResult } from '../models/survey-result.model';
+import { ChartItem } from '../models/chart-item.model';
 
 @Component({
   selector: 'app-encuesta-resultados',

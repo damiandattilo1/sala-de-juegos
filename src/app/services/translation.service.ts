@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-
-interface MyMemoryResponse {
-  responseData?: {
-    translatedText?: string;
-  };
-}
+import { MyMemoryResponse } from '../models/my-memory-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class TranslationService {

@@ -4,11 +4,7 @@ import { User } from 'firebase/auth';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { GameDataService } from '../services/game-data.service';
-
-interface RoundScore {
-  label: string;
-  points: number;
-}
+import { RoundScore } from '../models/round-score.model';
 
 @Component({
   selector: 'app-generala-simple',
