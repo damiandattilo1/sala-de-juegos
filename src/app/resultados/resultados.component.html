@@ -16,6 +16,7 @@
           <th>Tiempo</th>
           <th>Letras</th>
           <th>Palabra</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,7 @@
           <td>{{ item.tiempoSegundos }}s</td>
           <td>{{ item.letrasSeleccionadas }}</td>
           <td>{{ item.palabra }}</td>
+          <td>{{ toDate(item.createdAt) | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
       </tbody>
     </table>
@@ -39,6 +41,7 @@
           <th>Aciertos</th>
           <th>Rondas</th>
           <th>Estado</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
@@ -47,6 +50,7 @@
           <td>{{ item.aciertos }}</td>
           <td>{{ item.rondasJugadas }}</td>
           <td>{{ item.gano ? 'Ganó' : 'Perdió' }}</td>
+          <td>{{ toDate(item.createdAt) | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
       </tbody>
     </table>
@@ -61,6 +65,7 @@
           <th>Aciertos</th>
           <th>Preguntas</th>
           <th>Tiempo</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
@@ -69,6 +74,7 @@
           <td>{{ item.aciertos }}</td>
           <td>{{ item.totalPreguntas }}</td>
           <td>{{ item.tiempoSegundos }}s</td>
+          <td>{{ toDate(item.createdAt) | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
       </tbody>
     </table>
@@ -84,6 +90,7 @@
           <th>Puntos CPU</th>
           <th>Rondas</th>
           <th>Estado</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
@@ -93,6 +100,7 @@
           <td>{{ item.puntosCpu }}</td>
           <td>{{ item.rondasJugadas }}</td>
           <td>{{ item.gano ? 'Ganó' : 'Perdió' }}</td>
+          <td>{{ toDate(item.createdAt) | date:'dd/MM/yyyy HH:mm' }}</td>
         </tr>
       </tbody>
     </table>

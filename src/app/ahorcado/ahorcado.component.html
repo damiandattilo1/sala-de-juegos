@@ -2,6 +2,41 @@
   <h2>Ahorcado</h2>
   <p class="subtitle">Adiviná la palabra usando solo los botones del abecedario.</p>
 
+  <div class="hangman-drawing">
+    <svg viewBox="0 0 200 250" class="hangman-svg" aria-label="Dibujo del ahorcado">
+      <!-- Horca -->
+      <line x1="20" y1="230" x2="180" y2="230" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="230" x2="60" y2="20" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="20" x2="130" y2="20" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="50" x2="82" y2="20" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+      <line x1="130" y1="20" x2="130" y2="45" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/>
+      <!-- Cabeza (error 1) -->
+      @if (wrongAttempts >= 1) {
+        <circle cx="130" cy="62" r="17" stroke="#f87171" stroke-width="3" fill="none"/>
+      }
+      <!-- Cuerpo (error 2) -->
+      @if (wrongAttempts >= 2) {
+        <line x1="130" y1="79" x2="130" y2="145" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+      }
+      <!-- Brazo izquierdo (error 3) -->
+      @if (wrongAttempts >= 3) {
+        <line x1="130" y1="100" x2="100" y2="128" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+      }
+      <!-- Brazo derecho (error 4) -->
+      @if (wrongAttempts >= 4) {
+        <line x1="130" y1="100" x2="160" y2="128" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+      }
+      <!-- Pierna izquierda (error 5) -->
+      @if (wrongAttempts >= 5) {
+        <line x1="130" y1="145" x2="103" y2="180" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+      }
+      <!-- Pierna derecha (error 6) -->
+      @if (wrongAttempts >= 6) {
+        <line x1="130" y1="145" x2="157" y2="180" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+      }
+    </svg>
+  </div>
+
   <div class="status-box">
     <p class="word">{{ maskedWord }}</p>
     <p class="attempts">Errores: {{ wrongAttempts }} / {{ maxErrors }} | Intentos restantes: {{ remainingAttempts }}</p>

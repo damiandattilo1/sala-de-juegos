@@ -86,29 +86,33 @@ export class GameDataService {
   private db: Firestore = getFirestore(this.app);
 
   async saveHangmanResult(result: Omit<HangmanResult, 'createdAt'>): Promise<void> {
-    await addDoc(collection(this.db, 'resultados_ahorcado'), {
+    await addDoc(collection(this.db, 'resultados'), {
       ...result,
+      juego: 'ahorcado',
       createdAt: serverTimestamp()
     });
   }
 
   async saveHigherLowerResult(result: Omit<HigherLowerResult, 'createdAt'>): Promise<void> {
-    await addDoc(collection(this.db, 'resultados_mayor_menor'), {
+    await addDoc(collection(this.db, 'resultados'), {
       ...result,
+      juego: 'mayor-menor',
       createdAt: serverTimestamp()
     });
   }
 
   async saveTriviaResult(result: Omit<TriviaResult, 'createdAt'>): Promise<void> {
-    await addDoc(collection(this.db, 'resultados_preguntados'), {
+    await addDoc(collection(this.db, 'resultados'), {
       ...result,
+      juego: 'preguntados',
       createdAt: serverTimestamp()
     });
   }
 
   async saveGeneralaResult(result: Omit<GeneralaResult, 'createdAt'>): Promise<void> {
-    await addDoc(collection(this.db, 'resultados_generala'), {
+    await addDoc(collection(this.db, 'resultados'), {
       ...result,
+      juego: 'generala',
       createdAt: serverTimestamp()
     });
   }
@@ -117,28 +121,28 @@ export class GameDataService {
     onResults: (results: HangmanResult[]) => void,
     onError?: (errorMessage: string) => void
   ): () => void {
-    return this.subscribeCollection<HangmanResult>('resultados_ahorcado', onResults, onError);
+    return this.subscribeGameResults<HangmanResult>('ahorcado', onResults, onError);
   }
 
   subscribeHigherLowerResults(
     onResults: (results: HigherLowerResult[]) => void,
     onError?: (errorMessage: string) => void
   ): () => void {
-    return this.subscribeCollection<HigherLowerResult>('resultados_mayor_menor', onResults, onError);
+    return this.subscribeGameResults<HigherLowerResult>('mayor-menor', onResults, onError);
   }
 
   subscribeTriviaResults(
     onResults: (results: TriviaResult[]) => void,
     onError?: (errorMessage: string) => void
   ): () => void {
-    return this.subscribeCollection<TriviaResult>('resultados_preguntados', onResults, onError);
+    return this.subscribeGameResults<TriviaResult>('preguntados', onResults, onError);
   }
 
   subscribeGeneralaResults(
     onResults: (results: GeneralaResult[]) => void,
     onError?: (errorMessage: string) => void
   ): () => void {
-    return this.subscribeCollection<GeneralaResult>('resultados_generala', onResults, onError);
+    return this.subscribeGameResults<GeneralaResult>('generala', onResults, onError);
   }
 
   async sendChatMessage(uid: string, email: string, nombre: string, mensaje: string): Promise<void> {
@@ -200,6 +204,36 @@ export class GameDataService {
     const q = query(collection(this.db, 'encuestas'), where('uid', '==', uid), limit(1));
     const snap = await getDocs(q);
     return !snap.empty;
+  }
+
+  private subscribeGameResults<T extends { createdAt?: Timestamp }>(
+    juego: string,
+    onResults: (results: T[]) => void,
+    onError?: (errorMessage: string) => void
+  ): () => void {
+    const resultsQuery = query(
+      collection(this.db, 'resultados'),
+      where('juego', '==', juego),
+      orderBy('createdAt', 'desc')
+    );
+
+    return onSnapshot(
+      resultsQuery,
+      (snapshot) => {
+        const results = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data() as Record<string, unknown>;
+          return {
+            ...data,
+            createdAt: data['createdAt'] as Timestamp | undefined
+          } as T;
+        });
+
+        onResults(results);
+      },
+      (error) => {
+        onError?.(error.message);
+      }
+    );
   }
 
   private subscribeCollection<T extends { createdAt?: Timestamp }>(

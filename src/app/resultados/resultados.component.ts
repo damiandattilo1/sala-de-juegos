@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
@@ -8,11 +8,12 @@ import {
   HigherLowerResult,
   TriviaResult
 } from '../services/game-data.service';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-resultados',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './resultados.component.html',
   styleUrl: './resultados.component.css'
 })
@@ -87,6 +88,10 @@ export class ResultadosComponent implements OnInit, OnDestroy {
         (error) => this.errorMessage = error
       )
     );
+  }
+
+  toDate(ts: Timestamp | undefined): Date | null {
+    return ts ? ts.toDate() : null;
   }
 
   ngOnDestroy(): void {

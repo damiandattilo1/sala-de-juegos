@@ -1,19 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { OpenTdbResponse } from '../models/open-tdb-response.model';
+import { OpenTdbQuestion } from '../models/open-tdb-question.model';
 
-export interface OpenTdbResponse {
-  response_code: number;
-  results: OpenTdbQuestion[];
-}
-
-export interface OpenTdbQuestion {
-  category: string;
-  difficulty: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
+export type { OpenTdbResponse, OpenTdbQuestion };
 
 @Injectable({ providedIn: 'root' })
 export class TriviaApiService {
