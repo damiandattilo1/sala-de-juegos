@@ -1,0 +1,13 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "resultados",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "juego", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
